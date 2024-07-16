@@ -7,43 +7,55 @@ import { useState } from "react";
 
 export default function Home() {
 
-  const boards = data.boards;
-
-  const [currentBoard, setCurrentBoard] = useState(boards[0]);
+  const [currentBoard, setCurrentBoard] = useState(data.boards[0]);
 
   return (
-    <main className="flex min-h-screen min-w-screen">
-      
-      <nav className="flex flex-col w-72  bg-gray-700">
-        <p><Image src="/assets/logo-dark.svg" alt="Logo" width={153} height={25} /></p>
-        <div className="grow">
-          <ul>
-            <li>All Boards {boards.length}</li>
-            {boards.map((board) => (
-              <li onClick={() => {setCurrentBoard(board)}}>{board.name}</li>
-            ))}
-            <li>Create New Board</li>
-          </ul>
-        </div>
-        <div>
-          <p>Dark mode switch</p>
-          <p>Hide Sidebar</p>
-        </div>
-      </nav>
+    
       <div className="flex flex-col grow ">
-        <header className="h-24  bg-gray-700 flex justify-between items-center">
-          <p className="pl-6">{currentBoard.name}</p>
-          <div className="pr-8"><button>+ Add New Task</button></div>
+
+        <header className="h-24 bg-white flex justify-between items-center border-b border-gray-200 dark:bg-darkGrey dark:border-gray-700 dark:text-white transition-all">
+          <p className="pl-6 text-black heading-xl dark:text-white">{currentBoard.name}</p>
+          <div className="pr-8 flex justify-center items-center gap-6">
+            <button className="bg-mainPurple h-12 p-4 rounded-3xl text-white flex justify-center items-center opacity-25">+ Add New Task</button>
+            <Image src="./assets/icon-vertical-ellipsis.svg" alt="Hide Sidebar" width={5} height={20} />
+          </div>
         </header>
-        <section className="bg-gray-800 grow">
 
+        <section className="bg-lightGrey grow flex flex-col justify-center items-center gap-8 dark:bg-veryDarkGrey transition-all">
 
-          {currentBoard.columns.map((column) => (
-            <div>{column.name}</div>
-          ))}
+          {
+            currentBoard.columns.length > 0 
+            ? <div className="grow p-6 flex gap-6 justify-start w-full">
+              {currentBoard.columns.map((column) => (
+                <div className="flex flex-col grow max-w-[280px] gap-5">
+                  <p className="heading-s text-mediumGrey uppercase tracking-widest">{column.name} ({column.tasks.length})</p>
+                  {
+                    column.tasks.map((task) => (
+                      <div className="flex flex-col justify-center items-start px-4 py-6 gap-2 rounded-lg bg-white dark:bg-darkGrey">
+                        <p className="heading-m text-black dark:text-white" >{task.title}</p>
+                        <p className="body-m text-mediumGrey">
+                          {task.subtasks.filter((subtask) => subtask.isCompleted === true).length} 
+                          of 
+                          {task.subtasks.length} subtasks</p>
+                      </div>
+                    ))
+                  }
+                </div>
+              ))}
+                <div className="flex max-w-[280px] justify-center items-center mt-[35px] grow rounded-lg bg-[#E9EFFA] dark:bg-opacity-25 dark:bg-darkGrey ">
+                  <p className="heading-xl text-mediumGrey">+ New Column</p>
+                </div>
+            </div>
+            : <>
+              <p className="heading-l text-mediumGrey">This board is empty. Create a new column to get started.</p>
+              <button className="bg-mainPurple h-12 p-4 rounded-3xl text-white flex justify-center items-center">+ Add New Column</button>
+            </>
+
+          }
+          
+
         </section>
       </div>
       
-    </main>
   );
 }

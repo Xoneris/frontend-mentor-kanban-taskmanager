@@ -11,7 +11,7 @@ const config: Config = {
     extend: {
       colors: {
         "mainPurple": "#635FC7",
-        "mainPurpleHover": "A8A4FF",
+        "mainPurpleHover": "#A8A4FF",
         "black": "#000112",
         "veryDarkGrey": "#20212C",
         "darkGrey": "#2B2C37",
@@ -22,9 +22,6 @@ const config: Config = {
         "red": "#EA5555",
         "redHover": "#FF9898",
       },
-      margin: {
-        "m-5.5" : "22px"
-      }
     },
     
   },

@@ -19,7 +19,7 @@ export default function DarkModeToggle () {
 
     return (
         
-        <div className="w-64 h-12 m-auto flex justify-center items-center bg-lightGrey rounded-lg dark:bg-veryDarkGrey transition-all">
+        <div className="w-64 h-12 ml-4 flex justify-center items-center bg-lightGrey rounded-lg dark:bg-veryDarkGrey">
             <Image src="./assets/icon-light-theme.svg" alt="Lightmode Logo" width={18} height={18}/>
             <div className="mr-6 ml-6 w-10 h-5 rounded-full bg-mainPurple relative hover:bg-mainPurpleHover"
                 onClick={() => {setToggleDarkMode(!toggleDarkMode)}}>

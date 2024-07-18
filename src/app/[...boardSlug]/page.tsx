@@ -14,7 +14,7 @@ export default function DynamicPage({ params }: { params: { boardSlug: string } 
   // console.log("is fucking", data.boards[0].name.replace(" ", "-").toLowerCase(), "not the same as fucking", boardSlug['0'])
 
   return (
-    <div className="flex flex-col grow ">
+    <>
 
         <header className="h-24 bg-white flex justify-between items-center border-b border-gray-200 dark:bg-darkGrey dark:border-gray-700 dark:text-white transition-all">
           <p className="pl-6 text-black heading-xl dark:text-white">{boardSlug['0'].replace("-", " ").toUpperCase()}</p>
@@ -44,8 +44,8 @@ export default function DynamicPage({ params }: { params: { boardSlug: string } 
                   }
                 </div>
               ))}
-                <div className="flex max-w-[280px] justify-center items-center mt-[35px] grow rounded-lg bg-[#E9EFFA] dark:bg-opacity-25 dark:bg-darkGrey ">
-                  <p className="heading-xl text-mediumGrey">+ New Column</p>
+                <div className="flex max-w-[280px] justify-center items-center mt-[35px] grow rounded-lg bg-[#E9EFFA] text-mediumGrey dark:bg-opacity-25 dark:bg-darkGrey hover:text-mainPurple hover:cursor-pointer">
+                  <p className="heading-xl ">+ New Column</p>
                 </div>
             </div>
             : <>
@@ -57,6 +57,6 @@ export default function DynamicPage({ params }: { params: { boardSlug: string } 
           
 
         </section>
-      </div>
+      </>
 )
 }

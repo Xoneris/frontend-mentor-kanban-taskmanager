@@ -8,10 +8,8 @@ export default function DynamicPage({ params }: { params: { boardSlug: string } 
   
   const { boardSlug } = params;
 
-  const [currentBoard, setCurrentBoard] = useState(data.boards[0]);
+  // const [currentBoard, setCurrentBoard] = useState(data.boards[0]);
 
-  // const [currentBoard, setCurrentBoard] = useState(data.boards.filter((board) => board.name.replace(" ", "-").toLowerCase() === boardSlug[0]));
-  // console.log("is fucking", data.boards[0].name.replace(" ", "-").toLowerCase(), "not the same as fucking", boardSlug['0'])
 
   return (
     <>
@@ -25,7 +23,7 @@ export default function DynamicPage({ params }: { params: { boardSlug: string } 
         </header>
 
         <section className="bg-lightGrey grow flex flex-col justify-center items-center gap-8 dark:bg-veryDarkGrey transition-all">
-          {
+          {/* {
             currentBoard.columns.length > 0 
             ? <div className="grow p-6 flex gap-6 justify-start w-full">
               {currentBoard.columns.map((column) => (
@@ -53,6 +51,10 @@ export default function DynamicPage({ params }: { params: { boardSlug: string } 
               <button className="bg-mainPurple h-12 p-4 rounded-3xl text-white flex justify-center items-center">+ Add New Column</button>
             </>
 
+          } */
+          <div>
+            {boardSlug['0'].replace("-", " ").toUpperCase()}
+          </div>
           }
           
 

@@ -10,6 +10,9 @@ import Navigation from "./components/navigation";
 import DarkModeToggle from "./components/toggleDarkMode";
 
 import AddBoardModal from "./components/AddBoardModal";
+import AddNewTaskModal from "./components/addNewTaskModal";
+import EditBoardModal from "./components/editBoardModal";
+import DeleteBoardModal from "./components/deleteBoardModal";
 
 export default async function RootLayout({
   children,
@@ -77,6 +80,10 @@ export default async function RootLayout({
         </main>
         
         <AddBoardModal/>
+        <EditBoardModal/>
+        <DeleteBoardModal/>
+        
+        <AddNewTaskModal/>
 
       </body>
     </html>

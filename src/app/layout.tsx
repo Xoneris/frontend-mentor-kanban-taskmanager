@@ -4,7 +4,7 @@ import "./globals.css";
 import Image from "next/image";
 
 import { db } from "./drizzle/db";
-import { taskboardTable } from "./drizzle/schema";
+import { taskboardTable, columnsTable } from "./drizzle/schema";
 
 import Navigation from "./components/navigation";
 import DarkModeToggle from "./components/toggleDarkMode";
@@ -20,40 +20,16 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
 
-
-
-
-
-// async function addTaskBoard() {
-//   "use server"
-//     await db.insert(taskboardTable).values({
-//     name: "kekekekek",
-//     })
-//     .returning({
-//     id: taskboardTable.id
-//     })
-// }
-
-// addTaskBoard()
-
-
-
   const taskboards = await db.query.taskboardTable.findMany()
-  
-  
-  //
-  // const connectionString = process.env.DATABASE_URL
-  // const client = postgres(connectionString)
-  // const db = drizzle(client);
-  // const allUsers = await db.select().from(taskboard);
+  // const taskboardcolumns = await db.query.columnsTable.findMany().
 
-  //
+  console.log(taskboards)
 
   return (
     <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com"/>
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
+        <link rel="preconnect" href="https://fonts.gstatic.com"  />
         <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet" />
       </head>
 

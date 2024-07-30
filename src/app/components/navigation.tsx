@@ -27,8 +27,8 @@ export default function Navigation({taskboards}) {
             <ul>
                 <li className="ml-6 mb-5 uppercase body-m tracking-wide text-mediumGrey w">All Boards ({boards.length})</li>
                 {boards.map((board) => (
-                    <Link href={`/${board.name.replace(" ", "-").toLowerCase()}`}>
-                    <li className={`text-mediumGrey h-12 mr-6 pl-8 flex items-center gap-4 heading-m hover:text-mainPurple hover:bg-mainPurple hover:dark:bg-white      hover:bg-opacity-10 rounded-r-3xl ${pathname === "/"+board.name.replace(" ", "-").toLowerCase() ? "bg-mainPurple text-white" : null}`}
+                    <Link href={`/${board.name.replace(/ /g, "-").toLowerCase()}`}>
+                    <li className={`text-mediumGrey h-12 mr-6 pl-8 flex items-center gap-4 heading-m hover:text-mainPurple hover:bg-mainPurple hover:dark:bg-white      hover:bg-opacity-10 rounded-r-3xl ${pathname === "/"+board.name.replace(/ /g, "-").toLowerCase() ? "bg-mainPurple text-white" : null}`}
                     key={board.name}>
                         <Image src="./assets/icon-board.svg" alt="Lightmode Logo" width={18} height={18}/>
                         {board.name}

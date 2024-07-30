@@ -16,7 +16,7 @@ export default function DynamicPage({ params }: { params: { boardSlug: string } 
   return (
     <>
       <header className="h-24 bg-white flex justify-between items-center border-b border-gray-200 dark:bg-darkGrey dark:border-gray-700 dark:text-white transition-all">
-        <p className="pl-6 text-black heading-xl dark:text-white">{boardSlug['0'].replace("-", " ").toUpperCase()}</p>
+        <p className="pl-6 text-black heading-xl dark:text-white">{boardSlug['0'].replace(/-/g, " ").toUpperCase()}</p>
         <div className="pr-8 flex justify-center items-center gap-6">
           <Link href={"?addNewTask=true"}>
             <button className="bg-mainPurple h-12 p-4 rounded-3xl text-white flex justify-center items-center hover:bg-mainPurpleHover">+ Add New Task</button>

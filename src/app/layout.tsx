@@ -9,7 +9,7 @@ import { taskboardTable, columnsTable } from "./drizzle/schema";
 import Navigation from "./components/navigation";
 import DarkModeToggle from "./components/toggleDarkMode";
 
-import AddBoardModal from "./components/AddBoardModal";
+import AddBoardModal from "./components/addBoardModal";
 import AddNewTaskModal from "./components/addNewTaskModal";
 import EditBoardModal from "./components/editBoardModal";
 import DeleteBoardModal from "./components/deleteBoardModal";
@@ -23,7 +23,6 @@ export default async function RootLayout({
   const taskboards = await db.query.taskboardTable.findMany()
   // const taskboardcolumns = await db.query.columnsTable.findMany().
 
-  console.log(taskboards)
 
   return (
     <html lang="en">
@@ -51,7 +50,7 @@ export default async function RootLayout({
           </div>
         </div>
 
-        <main className="flex flex-col grow ">
+        <main className="flex flex-col grow">
           {children}
         </main>
         

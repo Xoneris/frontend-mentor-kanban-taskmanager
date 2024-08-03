@@ -28,7 +28,7 @@ export default async function DynamicPage({ params }: { params: { boardSlug: str
   const findTasksOfColumn = async (id) => {
 
     const currentTaskBoardTasks = await db.select().from(tasksTable).where(eq(tasksTable.columnsId, id))
-    console.log(currentTaskBoardTasks)
+    // console.log(currentTaskBoardTasks)
     return currentTaskBoardTasks
     // return (<h1>test</h1>)
   }
@@ -43,15 +43,18 @@ export default async function DynamicPage({ params }: { params: { boardSlug: str
       <section className="bg-lightGrey grow flex flex-col justify-center items-center gap-8 dark:bg-veryDarkGrey transition-all">
         {
           currentTaskBoardColumns.length > 0 
-            ? currentTaskBoardColumns.map((boardColumn) => (
-              <div className="grow p-6 flex gap-6 justify-start w-full" key={boardColumn.id}>
-                <TaskboardColumn columnName={boardColumn.name} columnTasks={findTasksOfColumn(boardColumn.id)}>
-                  {/* <TaskBoardTasks/> */}
-                </TaskboardColumn>
-                {/* {findTasksOfColumn(boardColumn.id)} */}
+            ? <div className="grow p-6 flex gap-6 justify-start w-full">
+              {currentTaskBoardColumns.map((boardColumn) => (
+                <TaskboardColumn 
+                  columnName={boardColumn.name} 
+                  columnId={boardColumn.id}
+                  key={boardColumn.id}
+                  />
+              ))}
+                <div className="flex max-w-[280px] justify-center items-center mt-[35px] grow rounded-lg bg-[#E9EFFA] text-mediumGrey dark:bg-opacity-25 dark:bg-darkGrey hover:text-mainPurple hover:cursor-pointer">
+                  <p className="heading-xl ">+ New Column</p>
+                </div>
               </div>
-              ))
-                  
             : <>
               <p className="heading-l text-mediumGrey">This board is empty. Create a new column to get started.</p>
               <button className="bg-mainPurple h-12 p-4 rounded-3xl text-white flex justify-center items-center">+ Add New Column</button>

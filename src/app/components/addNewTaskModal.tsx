@@ -15,7 +15,6 @@ export default function AddNewTaskModal() {
     const modal = searchParams.get("addNewTask");
     const pathname = usePathname();
 
-
     return (
 
         modal && 

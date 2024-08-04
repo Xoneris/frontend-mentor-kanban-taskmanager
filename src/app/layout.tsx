@@ -13,6 +13,7 @@ import AddBoardModal from "./components/addBoardModal";
 import AddNewTaskModal from "./components/addNewTaskModal";
 import EditBoardModal from "./components/editBoardModal";
 import DeleteBoardModal from "./components/deleteBoardModal";
+import ShowTaskModal from "./components/showTaskModal";
 
 export default async function RootLayout({
   children,
@@ -21,8 +22,6 @@ export default async function RootLayout({
 }>) {
 
   const taskboards = await db.query.taskboardTable.findMany()
-  // const taskboardcolumns = await db.query.columnsTable.findMany().
-
 
   return (
     <html lang="en">
@@ -59,6 +58,7 @@ export default async function RootLayout({
         <DeleteBoardModal/>
         
         <AddNewTaskModal/>
+        <ShowTaskModal/>
 
       </body>
     </html>

@@ -5,6 +5,7 @@ export const statusEnum = pgEnum('status', ['ToDo', 'Doing', 'Done']);
 export const taskboardTable = pgTable("taskboard", {
   id: serial("id").primaryKey(),
   name: varchar("name", { length: 256 }).notNull(),
+  // slug: varchar("slug", {length: 256}).notNull(),
 });
 
 export const columnsTable = pgTable("columns", {

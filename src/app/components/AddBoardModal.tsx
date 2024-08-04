@@ -14,6 +14,7 @@ export default function AddBoardModal() {
     const searchParams = useSearchParams();
     const modal = searchParams.get("newBoard");
     const pathname = usePathname();
+    // const currentBoard = params
 
     const [columns, setColumns] = useState([
         {id: 1, name: "ToDo"},

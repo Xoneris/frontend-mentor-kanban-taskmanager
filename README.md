@@ -1,6 +1,6 @@
 # Frontend Mentor - Space Tourism Multipage
 
-This is a solution to the (Kanban Task Management Web App Challenge)[https://www.frontendmentor.io/challenges/kanban-task-management-web-app-wgQLt-HlbB]. Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
+This is a solution to the [Kanban Task Management Web App Challenge](https://www.frontendmentor.io/challenges/kanban-task-management-web-app-wgQLt-HlbB). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
 
 - Live Site URL: Work in Progress
 

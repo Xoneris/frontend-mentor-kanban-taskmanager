@@ -1,6 +1,6 @@
 "use client"
 
-import {useSearchParams, usePathname, redirect} from "next/navigation";
+import {useSearchParams, usePathname} from "next/navigation";
 import Link from "next/link";
 
 export default function DeleteBoardModal() {
@@ -21,14 +21,15 @@ export default function DeleteBoardModal() {
                 <p className="heading-l text-red">Delete this board?</p>
                 <p className="body-l text-mediumGrey">Are you sure you want to delete the {"Cool Name"} board? This action will remove all columns and tasks and cannot be reversed.</p>
                 <div className="flex w-full gap-4">
-                    <button className="w-full h-10 rounded-full text-white font-bold bg-red hover:bg-redHover">Delete</button>
+                    <button className="w-full h-10 rounded-full text-white font-bold bg-red hover:bg-redHover">
+                        Delete
+                    </button>
                     
-                        <button className="w-full h-10 rounded-full font-bold bg-mainPurple bg-opacity-10 dark:bg-white text-mainPurple hover:bg-opacity-25">
-                            <Link href={pathname}>Cancel</Link>
-                        </button>
+                    <button className="w-full h-10 rounded-full font-bold bg-mainPurple bg-opacity-10 dark:bg-white text-mainPurple hover:bg-opacity-25">
+                        <Link href={pathname}>Cancel</Link>
+                    </button>
                     
                 </div>
-                
             </dialog>
         </>
     )

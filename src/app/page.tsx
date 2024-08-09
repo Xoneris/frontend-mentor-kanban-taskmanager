@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 
 export default function Home() {
 
-  redirect(`/platform-launch`) 
+  // redirect(`/platform-launch`) 
 
   return (
     

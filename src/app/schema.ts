@@ -11,21 +11,21 @@ export const taskboardTable = pgTable("taskboard", {
 export const columnsTable = pgTable("columns", {
   id: serial("id").primaryKey(),
   name: varchar("name", { length: 256 }).notNull(),
-  taskboardId: integer("taskboardid").references(() => taskboardTable.id).notNull()
+  taskboardId: integer("taskboardId").references(() => taskboardTable.id).notNull()
 })
 
 export const tasksTable = pgTable("tasks", {
   id: serial("id").primaryKey(),
   title: varchar("title", { length: 256 }).notNull(), 
-  description: text("description"),
+  description: text("name"),
   status: statusEnum("status").default("ToDo").notNull(),
-  columnsId: integer("columnsid").references(() => columnsTable.id).notNull()
+  columnsId: integer("columnsId").references(() => columnsTable.id).notNull()
 })
 
 export const subTasksTable = pgTable("subtasks", {
   id: serial("id").primaryKey(),
   title: varchar("title", { length: 256 }).notNull(),
   isCompleted: boolean("isCompleted").default(false).notNull(),
-  tasksId: integer("tasksid").references(() => tasksTable.id).notNull()
+  tasksId: integer("tasksId").references(() => tasksTable.id).notNull()
 })
 

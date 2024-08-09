@@ -21,11 +21,11 @@ export default async function DynamicPage({ params }: { params: { boardSlug: str
 
   
   const currentTaskBoard = await db.select().from(taskboardTable).where(eq(taskboardTable.name, "Platform Launch"))
-  const currentTaskBoardColumns = await db.select().from(columnsTable).where(eq(columnsTable.taskboardId, currentTaskBoard[0].id))
+  const currentTaskBoardColumns = await db.select().from(columnsTable).where(eq(columnsTable.taskboarid, currentTaskBoard[0].id))
   
   // const currentTaskBoardSubtasks = await db.select().from(subTasksTable).where(eq(columnsTable.taskboardId, currentTaskBoard[0].id))
 
-  const findTasksOfColumn = async (id) => {
+  const findTasksOfColumn = async (id:number) => {
 
     const currentTaskBoardTasks = await db.select().from(tasksTable).where(eq(tasksTable.columnsId, id))
     // console.log(currentTaskBoardTasks)
@@ -57,7 +57,9 @@ export default async function DynamicPage({ params }: { params: { boardSlug: str
               </div>
             : <>
               <p className="heading-l text-mediumGrey">This board is empty. Create a new column to get started.</p>
-              <button className="bg-mainPurple h-12 p-4 rounded-3xl text-white flex justify-center items-center">+ Add New Column</button>
+              <button className="bg-mainPurple h-12 p-4 rounded-3xl text-white flex justify-center items-center">
+                + Add New Column
+              </button>
             </>
         }
       </section>

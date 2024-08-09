@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import * as data from '../data.json';
 import Link from "next/link";
 
 export default function TaskboardHeader({taskboardName})  {

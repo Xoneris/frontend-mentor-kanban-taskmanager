@@ -20,8 +20,9 @@ export default async function DynamicPage({ params }: { params: { boardSlug: str
   // const [showBoardOptions, setShowBoardOptions] = useState(false)
 
   
-  const currentTaskBoard = await db.select().from(taskboardTable).where(eq(taskboardTable.name, "Platform Launch"))
-  const currentTaskBoardColumns = await db.select().from(columnsTable).where(eq(columnsTable.taskboarid, currentTaskBoard[0].id))
+  const currentTaskBoard = await db.select().from(taskboardTable).where(eq(taskboardTable.slug, boardSlug))
+  const currentTaskBoardColumns = await db.select().from(columnsTable).where(eq(columnsTable.taskboardId, currentTaskBoard[0].id))
+
   
   // const currentTaskBoardSubtasks = await db.select().from(subTasksTable).where(eq(columnsTable.taskboardId, currentTaskBoard[0].id))
 

@@ -1,5 +1,5 @@
 {
-  "id": "81e2454c-f3e2-40e4-be37-9a18a6f16a29",
+  "id": "4d2dc8ad-f00c-45a2-b369-138343824dac",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -20,8 +20,8 @@
           "primaryKey": false,
           "notNull": true
         },
-        "taskboardid": {
-          "name": "taskboardid",
+        "taskboard_id": {
+          "name": "taskboard_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": true
@@ -29,12 +29,12 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "columns_taskboardid_taskboard_id_fk": {
-          "name": "columns_taskboardid_taskboard_id_fk",
+        "columns_taskboard_id_taskboard_id_fk": {
+          "name": "columns_taskboard_id_taskboard_id_fk",
           "tableFrom": "columns",
           "tableTo": "taskboard",
           "columnsFrom": [
-            "taskboardid"
+            "taskboard_id"
           ],
           "columnsTo": [
             "id"
@@ -62,15 +62,15 @@
           "primaryKey": false,
           "notNull": true
         },
-        "isCompleted": {
-          "name": "isCompleted",
+        "is_completed": {
+          "name": "is_completed",
           "type": "boolean",
           "primaryKey": false,
           "notNull": true,
           "default": false
         },
-        "tasksid": {
-          "name": "tasksid",
+        "tasks_id": {
+          "name": "tasks_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": true
@@ -78,12 +78,12 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "subtasks_tasksid_tasks_id_fk": {
-          "name": "subtasks_tasksid_tasks_id_fk",
+        "subtasks_tasks_id_tasks_id_fk": {
+          "name": "subtasks_tasks_id_tasks_id_fk",
           "tableFrom": "subtasks",
           "tableTo": "tasks",
           "columnsFrom": [
-            "tasksid"
+            "tasks_id"
           ],
           "columnsTo": [
             "id"
@@ -151,10 +151,10 @@
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": true,
-          "default": "'ToDo'"
+          "default": "'todo'"
         },
-        "columnsid": {
-          "name": "columnsid",
+        "columns_id": {
+          "name": "columns_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": true
@@ -162,12 +162,12 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "tasks_columnsid_columns_id_fk": {
-          "name": "tasks_columnsid_columns_id_fk",
+        "tasks_columns_id_columns_id_fk": {
+          "name": "tasks_columns_id_columns_id_fk",
           "tableFrom": "tasks",
           "tableTo": "columns",
           "columnsFrom": [
-            "columnsid"
+            "columns_id"
           ],
           "columnsTo": [
             "id"
@@ -185,9 +185,9 @@
       "name": "status",
       "schema": "public",
       "values": [
-        "ToDo",
-        "Doing",
-        "Done"
+        "todo",
+        "doing",
+        "done"
       ]
     }
   },

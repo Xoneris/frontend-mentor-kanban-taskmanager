@@ -29,8 +29,7 @@ export default async function TaskboardColumn({columnName, columnId})  {
                     <div className="flex flex-col justify-center items-start px-4 py-6 gap-2 rounded-lg bg-white dark:bg-darkGrey hover:cursor-pointer group" key={task.id}>
                         <p className="heading-m text-black dark:text-white group-hover:text-mainPurple" >{task.title}</p>
                         <p className="body-m text-mediumGrey">
-                            {completedSubtasksOfTask(task.id)} of 
-                            {allSubtasksOfTask(task.id)} subtasks
+                            {completedSubtasksOfTask(task.id)} of {allSubtasksOfTask(task.id)} subtasks
                         </p>
                     </div>
                 </Link>

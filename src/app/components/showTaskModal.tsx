@@ -19,7 +19,8 @@ export default function ShowTaskModal() {
     useEffect(() => {
         const fetchTask = async () => {
             try {
-                const result = await showTaskAction(1)
+                const result = await showTaskAction(modal)
+                console.log(result)
                 setCurrentTask(result[0])
             } catch (err) {
                 console.log(err)
@@ -49,7 +50,7 @@ export default function ShowTaskModal() {
                     <p className="heading-l">{currentTask.title}</p>
                     <Image src="./assets/icon-vertical-ellipsis.svg" alt="Board options" width={5} height={20} 
                         className="hover:cursor-pointer" 
-                        />
+                    />
                 </div>
                 
 

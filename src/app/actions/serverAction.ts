@@ -27,7 +27,14 @@ export async function addNewBoardAction(boardName:string, pathname: string) {
 
 } 
 
+export async function getTaskboards() {
+    // const allBoards = await db.select().from(taskboardTable)
+    const allBoards = await db.query.taskboardTable.findMany()
+    return allBoards
+}
+
 export async function showBoardAction(boardId) {
+    
     const currentBoard = await db.select().from(taskboardTable).where(eq(taskboardTable.id, boardId))
     return currentBoard
 }

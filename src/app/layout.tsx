@@ -9,6 +9,8 @@ import { taskboardTable, columnsTable } from "./drizzle/schema";
 import Navigation from "./components/navigation";
 import DarkModeToggle from "./components/toggleDarkMode";
 
+import Sidebar from "./components/sidebar"
+
 import AddBoardModal from "./components/addBoardModal";
 import AddNewTaskModal from "./components/addNewTaskModal";
 import EditBoardModal from "./components/editBoardModal";
@@ -32,7 +34,7 @@ export default async function RootLayout({
   //     logo = "logo-light.svg"
   // }
 
-  const taskboards = await db.query.taskboardTable.findMany()
+  // const taskboards = await db.query.taskboardTable.findMany()
 
   return (
     <html lang="en">
@@ -43,7 +45,7 @@ export default async function RootLayout({
       </head>
 
       <body className="flex min-h-screen min-w-screen relative">
-        <div className="flex flex-col min-w-[300px] bg-white border-r border-gray-200 dark:bg-darkGrey dark:border-gray-700 transition-all">
+        {/* <div className="flex flex-col min-w-[300px] bg-white border-r border-gray-200 dark:bg-darkGrey dark:border-gray-700 transition-all">
           <Image src={"./assets/logo-dark.svg"} alt="Logo" width={153} height={25} className="ml-8 mt-8" />
           
           <Navigation taskboards={taskboards}/>
@@ -58,7 +60,8 @@ export default async function RootLayout({
             </div>
 
           </div>
-        </div>
+        </div> */}
+        <Sidebar />
 
         <main className="flex flex-col grow">
           {children}

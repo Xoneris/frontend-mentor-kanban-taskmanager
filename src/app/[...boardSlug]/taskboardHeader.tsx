@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
 
-export default function TaskboardHeader({taskboardName})  {
+export default function TaskboardHeader({taskboardName, taskboardId})  {
   
   const [showBoardOptions, setShowBoardOptions] = useState(false)
 
@@ -26,7 +26,7 @@ export default function TaskboardHeader({taskboardName})  {
               ?
               <div className="absolute flex flex-col p-4 gap-4 w-48 h-24 top-[88px] top border right-7 bg-white rounded-lg dark:bg-veryDarkGrey dark:border-gray-700">
                 <p className="text-mediumGrey">
-                  <Link href={"?editBoard=true"} onClick={() => setShowBoardOptions(false)}>Edit Board</Link>
+                  <Link href={"?editBoard="+taskboardId} onClick={() => setShowBoardOptions(false)}>Edit Board</Link>
                 </p>
                 <p className="text-red">
                   <Link href={"?deleteBoard=true"}  onClick={() => setShowBoardOptions(false)}>Delete Board</Link>

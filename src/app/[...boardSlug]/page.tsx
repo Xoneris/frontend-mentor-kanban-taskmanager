@@ -8,7 +8,6 @@
 import { db } from "../drizzle/db";
 import { eq, lt, gte, ne } from 'drizzle-orm';
 import { taskboardTable, columnsTable, tasksTable, subTasksTable } from "../drizzle/schema";
-// import Taskboard from "./taskboard";
 import TaskBoardHeader from "./taskboardHeader"
 import TaskboardColumn from "./taskboardColumn";
 
@@ -39,7 +38,10 @@ export default async function DynamicPage({ params }: { params: { boardSlug: str
 
   return (
     <>
-      <TaskBoardHeader taskboardName={currentTaskBoard[0].name}/>
+      <TaskBoardHeader 
+        taskboardName={currentTaskBoard[0].name}
+        taskboardId={currentTaskBoard[0].id}  
+      />
 
       <section className="bg-lightGrey grow flex flex-col justify-center items-center gap-8 dark:bg-veryDarkGrey transition-all">
         {

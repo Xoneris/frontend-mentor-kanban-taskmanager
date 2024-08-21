@@ -18,7 +18,7 @@ export default function EditBoardModal() {
     useEffect(() => {
         const fetchBoard = async () => {
             try {
-                const result = await showBoardAction(17)
+                const result = await showBoardAction(modal)
                 setCurrentBoard(result[0])
             } catch (err) {
                 console.log(err)
@@ -32,9 +32,9 @@ export default function EditBoardModal() {
 
     console.log(pathname)
 
-    // if (!currentBoard) {
-    //     return
-    // }
+    if (!currentBoard) {
+        return
+    }
 
     return (
         

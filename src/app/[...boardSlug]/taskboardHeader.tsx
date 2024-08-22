@@ -29,7 +29,7 @@ export default function TaskboardHeader({taskboardName, taskboardId})  {
                   <Link href={"?editBoard="+taskboardId} onClick={() => setShowBoardOptions(false)}>Edit Board</Link>
                 </p>
                 <p className="text-red">
-                  <Link href={"?deleteBoard=true"}  onClick={() => setShowBoardOptions(false)}>Delete Board</Link>
+                  <Link href={"?deleteBoard="+taskboardId}  onClick={() => setShowBoardOptions(false)}>Delete Board</Link>
                 </p>
               </div>
               : null }

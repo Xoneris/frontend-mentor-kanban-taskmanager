@@ -33,16 +33,29 @@ export async function getTaskboards() {
     return allBoards
 }
 
-export async function showBoardAction(boardId) {
+export async function getBoard(boardId:number) {
     
     const currentBoard = await db.select().from(taskboardTable).where(eq(taskboardTable.id, boardId))
     return currentBoard
 }
 
-export async function showTaskAction(taskId) {
+export async function getColumnsOfBoard(boardId:number) {
+
+    const currentColumnsOfBoard = await db.select().from(columnsTable).where(eq(columnsTable.taskboardId, boardId))
+    return currentColumnsOfBoard
+}
+
+export async function getTask(taskId:number) {
 
     const currentTask = await db.select().from(tasksTable).where(eq(tasksTable.id, taskId))
     return currentTask
 }
+
+export async function getSubtasks(taskId:number) {
+
+    const currentSubtasks = await db.select().from(subTasksTable).where(eq(subTasksTable.tasksId, taskId))
+    return currentSubtasks
+}
+
 
     

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
-import { showTaskAction } from "../actions/serverAction";
+import { getTask, getSubtasks } from "../actions/serverAction";
 
 export default function ShowTaskModal() {
 
@@ -14,25 +14,35 @@ export default function ShowTaskModal() {
     const pathname = usePathname();
 
     const [currentTask, setCurrentTask] = useState([])
+    const [currentSubtasks, setCurrentSubtasks] = useState([])
 
  
     useEffect(() => {
         const fetchTask = async () => {
             try {
-                const result = await showTaskAction(modal)
-                console.log(result)
+                const result = await getTask(modal)
                 setCurrentTask(result[0])
             } catch (err) {
                 console.log(err)
               }
         }
 
+        const fetchSubtasks = async () => {
+            try {
+                const result = await getSubtasks(modal)
+                setCurrentSubtasks(result)
+            } catch (err) {
+                console.log(err)
+            }
+        }
+
         fetchTask()
+        fetchSubtasks()
 
     }, [modal])
 
 
-    if (!currentTask){
+    if (!currentTask || !currentSubtasks){
         return
     }
 
@@ -55,17 +65,26 @@ export default function ShowTaskModal() {
                 
 
                 
-                <label>Description</label>
-                <p>{currentTask.description}</p>
-                <label>Subtasks</label>
+                <label className="body-m">Description</label>
+                <p>{currentTask.description ? currentTask.description : <i className="text-gray-500">This Task has no desccription</i>}</p>
+                <label className="body-m">Subtasks</label>
+                {
+                    currentSubtasks.map((subtask) => (
+                        <div className="w-full p-3 bg-veryDarkGrey flex justify-start items-center rounded gap-4" key={subtask.id}>
+                            <input type="checkbox" name="test" id="test" value="" className="bg-darkGrey checked:bg-mainPurple w-4 h-4" 
+                            checked={subtask.isCompleted} />
+                            <label htmlFor="test" className="text-mediumGrey">{subtask.title}</label>
+                        </div> 
+                    ))
+                }
 
-                <div className="w-full p-3 bg-veryDarkGrey flex justify-start items-center rounded gap-4">
+                {/* <div className="w-full p-3 bg-veryDarkGrey flex justify-start items-center rounded gap-4">
                     <input type="checkbox" name="test" id="test" value="" className="bg-darkGrey checked:bg-mainPurple w-4 h-4" />
                     <label htmlFor="test" className="text-mediumGrey">Some test or something lmao</label>
-                </div>
+                </div> */}
                 
 
-                <label>Current Status</label>
+                <label className="body-m">Current Status</label>
                 <select className="w-full p-2 rounded-sm border bg-darkGrey">
                     <option>ToDo</option>
                     <option>Doing</option>

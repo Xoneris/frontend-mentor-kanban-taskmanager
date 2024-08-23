@@ -23,9 +23,7 @@ export default function DarkModeToggle () {
             <Image src="./assets/icon-light-theme.svg" alt="Lightmode Logo" width={18} height={18}/>
             <div className="mr-6 ml-6 w-10 h-5 rounded-full bg-mainPurple relative hover:bg-mainPurpleHover hover:cursor-pointer"
                 onClick={() => {setToggleDarkMode(!toggleDarkMode)}}>
-                <div 
-                    className="absolute w-4 h-4 rounded-full bg-white mt-0.5 ml-0.5 dark:ml-[22px] transition-all"
-                    >
+                <div className="absolute w-4 h-4 rounded-full bg-white mt-0.5 ml-0.5 dark:ml-[22px] transition-all">
                 </div>
             </div>
             <Image src="./assets/icon-dark-theme.svg" alt="Darkmode Logo" width={18} height={18}/>

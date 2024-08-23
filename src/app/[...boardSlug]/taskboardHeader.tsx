@@ -6,13 +6,21 @@ import Link from "next/link";
 
 export default function TaskboardHeader({taskboardName, taskboardId})  {
   
-  const [showBoardOptions, setShowBoardOptions] = useState(false)
+  const [showBoardOptions, setShowBoardOptions] = useState<boolean>(false)
 
 
   return (
     <>
       <header className="h-24 bg-white flex justify-between items-center border-b border-gray-200 dark:bg-darkGrey dark:border-gray-700 dark:text-white transition-all">
-        <p className="pl-6 text-black heading-xl dark:text-white">{taskboardName}</p>
+        
+        {/* Logo if Sidebar is minimised */}
+        <div className="flex items-center">
+          {/* <div className="px-6 py-9 border-r dark:border-gray-700">
+            <Image src="./assets/logo-dark.svg" alt="Logo" width={153} height={26} />
+          </div> */}
+          
+          <p className="pl-6 text-black heading-xl dark:text-white">{taskboardName}</p>
+        </div>
         <div className="pr-8 flex justify-center items-center gap-6">
           <Link href={"?addNewTask=true"}>
             <button className="bg-mainPurple h-12 p-4 rounded-3xl text-white flex justify-center items-center hover:bg-mainPurpleHover">+ Add New Task</button>

@@ -15,6 +15,7 @@ export default function ShowTaskModal() {
 
     const [currentTask, setCurrentTask] = useState([])
     const [currentSubtasks, setCurrentSubtasks] = useState([])
+    const [showTaskOptions, setShowTaskOptions] = useState<boolean>(false)
 
  
     useEffect(() => {
@@ -50,7 +51,7 @@ export default function ShowTaskModal() {
         
         modal && 
         <>
-            <Link href={pathname} className="cursor-default">
+            <Link href={pathname} className="cursor-default" onClick={() => setShowTaskOptions(false)}>
                 <div className="absolute top-0 left-0 min-h-full min-w-full bg-black bg-opacity-40">
                 </div>
             </Link>
@@ -58,12 +59,27 @@ export default function ShowTaskModal() {
             <dialog className="absolute w-[480px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl p-8 flex flex-col justify-center items-start gap-4 dark:text-white dark:bg-darkGrey">
                 <div className="w-full flex justify-between">
                     <p className="heading-l">{currentTask.title}</p>
-                    <Image src="./assets/icon-vertical-ellipsis.svg" alt="Board options" width={5} height={20} 
-                        className="hover:cursor-pointer" 
-                    />
+                    <div className="flex items-center">
+                        <Image src="./assets/icon-vertical-ellipsis.svg" alt="Board options" width={5} height={20} 
+                            className="hover:cursor-pointer"
+                            onClick={() => setShowTaskOptions(!showTaskOptions)} 
+                        />
+                        {
+                            showTaskOptions === true 
+                            ? <div className="absolute flex flex-col p-4 gap-4 w-48 h-24 top-20 border -right-16 bg-white rounded-lg dark:bg-veryDarkGrey dark:border-gray-700">
+                            <p className="text-mediumGrey">
+                                {/* <Link href={"?editBoard="+taskboardId} onClick={() => setShowBoardOptions(false)}>Edit Board</Link> */}
+                                Edit Task
+                            </p>
+                            <p className="text-red">
+                                {/* <Link href={"?deleteBoard="+taskboardId}  onClick={() => setShowBoardOptions(false)}>Delete Board</Link> */}
+                                Delete Task
+                            </p>
+                        </div>
+                            : null }
+                        
+                    </div>
                 </div>
-                
-
                 
                 <label className="body-m">Description</label>
                 <p>{currentTask.description ? currentTask.description : <i className="text-gray-500">This Task has no desccription</i>}</p>
@@ -77,11 +93,6 @@ export default function ShowTaskModal() {
                         </div> 
                     ))
                 }
-
-                {/* <div className="w-full p-3 bg-veryDarkGrey flex justify-start items-center rounded gap-4">
-                    <input type="checkbox" name="test" id="test" value="" className="bg-darkGrey checked:bg-mainPurple w-4 h-4" />
-                    <label htmlFor="test" className="text-mediumGrey">Some test or something lmao</label>
-                </div> */}
                 
 
                 <label className="body-m">Current Status</label>

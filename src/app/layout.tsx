@@ -3,7 +3,7 @@
 import "./globals.css";
 
 import Sidebar from "./components/sidebar";
-import AddBoardModal from "./components/addBoardModal";
+import AddBoardModal from "./components/addboardmodal";
 import AddNewTaskModal from "./components/addNewTaskModal";
 import EditBoardModal from "./components/editBoardModal";
 import DeleteBoardModal from "./components/deleteBoardModal";

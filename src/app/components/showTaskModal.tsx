@@ -67,13 +67,11 @@ export default function ShowTaskModal() {
                         {
                             showTaskOptions === true 
                             ? <div className="absolute flex flex-col p-4 gap-4 w-48 h-24 top-20 border -right-16 bg-white rounded-lg dark:bg-veryDarkGrey dark:border-gray-700">
-                            <p className="text-mediumGrey">
-                                {/* <Link href={"?editBoard="+taskboardId} onClick={() => setShowBoardOptions(false)}>Edit Board</Link> */}
-                                Edit Task
+                            <p className="text-mediumGrey hover:cursor-pointer">
+                                <Link href={"?editTask="+currentTask.id} onClick={() => setShowTaskOptions(false)}>Edit Task</Link>
                             </p>
-                            <p className="text-red">
-                                {/* <Link href={"?deleteBoard="+taskboardId}  onClick={() => setShowBoardOptions(false)}>Delete Board</Link> */}
-                                Delete Task
+                            <p className="text-red hover:cursor-pointer">
+                                <Link href={"?deleteTask="+currentTask.id}  onClick={() => setShowTaskOptions(false)}>Delete Task</Link>
                             </p>
                         </div>
                             : null }

@@ -23,7 +23,7 @@ export default function AddBoardModal() {
 
     // const addNewBoard = addNewBoardAction.bind(null, )
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e:any) => {
         e.preventDefault()
         // const rawFormData = {
         //     name: formData.get("boardName")

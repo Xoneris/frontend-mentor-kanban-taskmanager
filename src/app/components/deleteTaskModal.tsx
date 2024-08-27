@@ -3,30 +3,30 @@
 import {useSearchParams, usePathname} from "next/navigation";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { getBoard } from "../actions/serverAction";
+import { getTask } from "../actions/serverAction";
 
-export default function DeleteBoardModal() {
+export default function DeleteTaskModal() {
 
     const searchParams = useSearchParams();
-    const modal = searchParams.get("deleteBoard");
+    const modal = searchParams.get("deleteTask");
     const pathname = usePathname();
-    const [currentBoard, setCurrentBoard] = useState([])
+    const [currentTask, setCurrentTask] = useState([])
 
     useEffect(() => {
-        const fetchBoard = async () => {
+        const fetchTask = async () => {
             try {
-                const result = await getBoard(modal)
-                setCurrentBoard(result[0])
+                const result = await getTask(modal)
+                setCurrentTask(result[0])
             } catch (err) {
                 console.log(err)
             }
         }
     
-        fetchBoard()
+        fetchTask()
 
     },[modal])
 
-    if (!currentBoard) {
+    if (!currentTask) {
         return
     }
 
@@ -39,8 +39,8 @@ export default function DeleteBoardModal() {
             </Link>
 
             <dialog className="absolute w-[480px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl p-8 flex flex-col gap-6 justify-center items-start dark:text-white dark:bg-darkGrey">
-                <p className="heading-l text-red">Delete this board?</p>
-                <p className="body-l text-mediumGrey">Are you sure you want to delete the <b><i>&apos;{currentBoard.name}&apos;</i></b> board? This action will remove all columns and tasks and cannot be reversed.</p>
+                <p className="heading-l text-red">Delete this task?</p>
+                <p className="body-l text-mediumGrey">Are you sure you want to delete the <b><i>&apos;{currentTask.title}&apos;</i></b> task and its subtasks? This action cannot be reversed.</p>
                 <div className="flex w-full gap-4">
                     <button className="w-full h-10 rounded-full text-white font-bold bg-red hover:bg-redHover">
                         Delete

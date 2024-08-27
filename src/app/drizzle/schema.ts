@@ -28,4 +28,3 @@ export const subTasksTable = pgTable("subtasks", {
   isCompleted: boolean("is_completed").default(false).notNull(),
   tasksId: integer("tasks_id").references(() => tasksTable.id).notNull()
 })
-

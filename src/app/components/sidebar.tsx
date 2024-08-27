@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image";
-
+import Link from "next/link"
 import Navigation from "./navigation";
 import DarkModeToggle from "./toggleDarkMode";
 import { useState } from "react";
@@ -15,7 +15,10 @@ export default function Sideboard() {
             <div className={`flex flex-col min-w-[300px] bg-white border-r border-gray-200 dark:bg-darkGrey dark:border-gray-700 transition-all 
                 ${showSidebar === true ? null : "hidden"}`}>
 
-                <Image src={"./assets/logo-dark.svg"} alt="Logo" width={153} height={25} className="ml-8 mt-8" />
+                <Link href={"/"}>
+                    <Image src={"./assets/logo-dark.svg"} alt="Logo" width={153} height={25} className="ml-8 mt-8" />
+                </Link>
+                
             
                 <Navigation/>
 

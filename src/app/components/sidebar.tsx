@@ -24,7 +24,7 @@ export default function Sideboard() {
                 <Navigation/>
 
                 <div className="mb-8 flex flex-col gap-2">
-                    <UserButton />
+                    {/* <UserButton /> */}
                     <DarkModeToggle/>
 
                     <div className="h-12 flex items-center mr-6 pl-6 gap-4 hover:text-mainPurple hover:bg-mainPurple hover:dark:bg-white hover:bg-opacity-10 hover:cursor-pointer rounded-r-3xl">

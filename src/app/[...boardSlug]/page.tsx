@@ -5,39 +5,37 @@ import { eq, lt, gte, ne } from 'drizzle-orm';
 import { taskboardTable, columnsTable, tasksTable, subTasksTable } from "../drizzle/schema";
 import TaskBoardHeader from "./taskboardHeader"
 import TaskboardColumn from "./taskboardColumn";
+import { Taskboard, TaskboardColumns } from "../types";
+import TaskboardHeader from "./taskboardHeader";
 
-export default async function DynamicPage({ params }: { params: { boardSlug: string } })  {
+export default async function DynamicPage({ params }: { params: { boardSlug: string|null } })  {
   
   const { boardSlug } = params;
 
-  // const [currentBoard, setCurrentBoard] = useState(data.boards[0]);
-  // const [showBoardOptions, setShowBoardOptions] = useState(false)
+  let currentTaskBoard:Taskboard[] = []
+  let currentTaskBoardColumns:TaskboardColumns[] = []
 
+  if (boardSlug !== null){
+    currentTaskBoard = await db.select().from(taskboardTable).where(eq(taskboardTable.slug, boardSlug))
+  }  
   
-  const currentTaskBoard = await db.select().from(taskboardTable).where(eq(taskboardTable.slug, boardSlug))
-  const currentTaskBoardColumns = await db.select().from(columnsTable).where(eq(columnsTable.taskboardId, currentTaskBoard[0].id))
-
-  
-
-  
-  // const currentTaskBoardSubtasks = await db.select().from(subTasksTable).where(eq(columnsTable.taskboardId, currentTaskBoard[0].id))
-
-  const findTasksOfColumn = async (id:number) => {
-
-    const currentTaskBoardTasks = await db.select().from(tasksTable).where(eq(tasksTable.columnsId, id))
-    // console.log(currentTaskBoardTasks)
-    return currentTaskBoardTasks
-    // return (<h1>test</h1>)
-  }
-
-  // const test = findTasksOfColumn(1)
-  // console.log(test)
-
-  if (!currentTaskBoard || !currentTaskBoardColumns) {
+  if (currentTaskBoard !== undefined && currentTaskBoard.length !== 0) {
+    currentTaskBoardColumns = await db.select().from(columnsTable).where(eq(columnsTable.taskboardId, currentTaskBoard[0].id))
+  } else {
     return (
-      <h1>404 smile</h1>
+      <>
+        <TaskboardHeader 
+          taskboardName={"404 - No Taskboard found"}
+          taskboardId={null}
+        />
+        <section className="bg-lightGrey grow flex flex-col justify-center items-center gap-8 dark:bg-veryDarkGrey transition-all">
+          No Taskboard found.
+        </section>
+      </>
     )
   }
+
+
 
   return (
     <>

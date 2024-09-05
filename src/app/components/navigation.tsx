@@ -12,14 +12,18 @@ export default function Navigation() {
 
     const pathname = usePathname()
     const [boards, setBoards] = useState<Taskboard[]>()
+    const [isLoading, setIsLoading] = useState<Boolean>(false)
 
     useEffect(() => {
+        setIsLoading(true)
         const fetchTaskboards = async () => {
             try {
                 const result = await getTaskboards()
                 setBoards(result)
+                setIsLoading(false)
             } catch (err) {
                 console.log(err)
+                setIsLoading(false)
               }
         }
 
@@ -27,6 +31,14 @@ export default function Navigation() {
 
     }, [])
     
+    if (isLoading === true) {
+        return (
+            <nav className="grow mt-14">
+                Loading Taskboards...
+            </nav>
+        )
+    }
+
     if (!boards){
         return 
     }

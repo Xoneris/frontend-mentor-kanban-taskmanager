@@ -5,8 +5,8 @@ import { useState } from "react";
 import Link from "next/link";
 
 interface props {
-  taskboardName: string,
-  taskboardId: number,
+  taskboardName: string|null,
+  taskboardId: number|null,
 }
 
 export default function TaskboardHeader({taskboardName, taskboardId}:props)  {
@@ -24,8 +24,8 @@ export default function TaskboardHeader({taskboardName, taskboardId}:props)  {
         
         <p className="pl-6 text-black heading-xl dark:text-white">{taskboardName}</p>
       </div>
-
-      <div className="pr-8 flex justify-center items-center gap-6">
+      { taskboardId !== null 
+      ? <div className="pr-8 flex justify-center items-center gap-6">
         <Link href={"?addNewTask=true"}>
           <button className="bg-mainPurple h-12 p-4 rounded-3xl text-white flex justify-center items-center hover:bg-mainPurpleHover">+ Add New Task</button>
         </Link>
@@ -46,8 +46,8 @@ export default function TaskboardHeader({taskboardName, taskboardId}:props)  {
             </div>
             : null }
         </div>
-        
       </div>
+      : null }
     </header>
 )
 }

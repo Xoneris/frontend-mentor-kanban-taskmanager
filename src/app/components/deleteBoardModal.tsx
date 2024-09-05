@@ -5,18 +5,24 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { getBoard } from "../actions/serverAction";
 
+interface Taskboard {
+    id: number, 
+    name: string,
+    slug: string,
+}
+
 export default function DeleteBoardModal() {
 
     const searchParams = useSearchParams();
     const modal = searchParams.get("deleteBoard");
     const pathname = usePathname();
-    const [currentBoard, setCurrentBoard] = useState([])
+    const [currentBoard, setCurrentBoard] = useState<Taskboard>()
 
     useEffect(() => {
         const fetchBoard = async () => {
             try {
-                const result = await getBoard(modal)
-                setCurrentBoard(result[0])
+                const result = await getBoard(Number(modal))
+                setCurrentBoard(result)
             } catch (err) {
                 console.log(err)
             }

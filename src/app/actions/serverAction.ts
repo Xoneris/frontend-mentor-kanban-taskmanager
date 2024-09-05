@@ -6,6 +6,7 @@ import { taskboardTable, columnsTable, tasksTable, subTasksTable } from "../driz
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 
+import { Taskboard, TaskboardColumns, Task, Subtask } from "../types"
 
 
 export async function addNewBoardAction(boardName:string, pathname: string) {
@@ -27,32 +28,33 @@ export async function addNewBoardAction(boardName:string, pathname: string) {
 
 } 
 
-export async function getTaskboards() {
+// GET all Taskboards
+export async function getTaskboards():Promise<Taskboard[]> {
     // const allBoards = await db.select().from(taskboardTable)
     const allBoards = await db.query.taskboardTable.findMany()
     return allBoards
 }
 
-export async function getBoard(boardId:number) {
-    
+// GET single Taskboard
+export async function getBoard(boardId:number):Promise<Taskboard> {
     const currentBoard = await db.select().from(taskboardTable).where(eq(taskboardTable.id, boardId))
-    return currentBoard
+    return currentBoard[0]
 }
 
-export async function getColumnsOfBoard(boardId:number) {
-
+// GET all Columns of a single Taskboard
+export async function getColumnsOfBoard(boardId:number):Promise<TaskboardColumns[]> {
     const currentColumnsOfBoard = await db.select().from(columnsTable).where(eq(columnsTable.taskboardId, boardId))
     return currentColumnsOfBoard
 }
 
-export async function getTask(taskId:number) {
-
+// GET a single Task
+export async function getTask(taskId:number):Promise<Task[]> {
     const currentTask = await db.select().from(tasksTable).where(eq(tasksTable.id, taskId))
     return currentTask
 }
 
-export async function getSubtasks(taskId:number) {
-
+// Get all Subtasks of a single Task
+export async function getSubtasks(taskId:number):Promise<Subtask[]> {
     const currentSubtasks = await db.select().from(subTasksTable).where(eq(subTasksTable.tasksId, taskId))
     return currentSubtasks
 }

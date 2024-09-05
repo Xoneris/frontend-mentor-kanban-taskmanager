@@ -4,6 +4,7 @@ import {useSearchParams, usePathname, redirect} from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { Taskboard, TaskboardColumns } from "../types";
 import { getBoard, getColumnsOfBoard } from "../actions/serverAction";
 
 export default function EditBoardModal() {
@@ -12,14 +13,14 @@ export default function EditBoardModal() {
     const modal = searchParams.get("editBoard");
     const pathname = usePathname();
 
-    const [currentBoard, setCurrentBoard] = useState([])
-    const [currentColumns, setCurrentColumns] = useState([])
+    const [currentBoard, setCurrentBoard] = useState<Taskboard>()
+    const [currentColumns, setCurrentColumns] = useState<TaskboardColumns[]>()
 
     useEffect(() => {
         const fetchBoard = async () => {
             try {
-                const result = await getBoard(modal)
-                setCurrentBoard(result[0])
+                const result = await getBoard(Number(modal))
+                setCurrentBoard(result)
             } catch (err) {
                 console.log(err)
             }
@@ -27,7 +28,7 @@ export default function EditBoardModal() {
 
         const fetchColumnsOfBoard = async () => {
             try {
-                const result = await getColumnsOfBoard(modal)
+                const result = await getColumnsOfBoard(Number(modal))
                 setCurrentColumns(result)
             } catch (err) {
                 console.log(err)

@@ -4,13 +4,14 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { Taskboard } from "../types";
 import { getTaskboards } from "../actions/serverAction";
 
 
 export default function Navigation() {
 
     const pathname = usePathname()
-    const [boards, setBoards] = useState([])
+    const [boards, setBoards] = useState<Taskboard[]>()
 
     useEffect(() => {
         const fetchTaskboards = async () => {

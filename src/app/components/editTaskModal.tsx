@@ -4,6 +4,7 @@ import {useSearchParams, usePathname, redirect} from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { Task, Subtask } from "../types";
 import { getTask, getSubtasks } from "../actions/serverAction";
 
 export default function EditTaskModal() {
@@ -12,13 +13,13 @@ export default function EditTaskModal() {
     const modal = searchParams.get("editTask");
     const pathname = usePathname();
 
-    const [currentTask, setCurrentTask] = useState([])
-    const [currentSubtasks, setCurrentSubtasks] = useState([])
+    const [currentTask, setCurrentTask] = useState<Task>()
+    const [currentSubtasks, setCurrentSubtasks] = useState<Subtask[]>()
 
     useEffect(() => {
         const fetchTask = async () => {
             try {
-                const result = await getTask(modal)
+                const result = await getTask(Number(modal))
                 setCurrentTask(result[0])
             } catch (err) {
                 console.log(err)
@@ -27,7 +28,7 @@ export default function EditTaskModal() {
 
         const fetchSubtasks = async () => {
             try {
-                const result = await getSubtasks(modal)
+                const result = await getSubtasks(Number(modal))
                 setCurrentSubtasks(result)
             } catch (err) {
                 console.log(err)

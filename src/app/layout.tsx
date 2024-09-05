@@ -10,7 +10,12 @@ import DeleteBoardModal from "./components/deleteBoardModal";
 import ShowTaskModal from "./components/showTaskModal";
 import DeleteTaskModal from "./components/deleteTaskModal";
 import EditTaskModal from "./components/editTaskModal";
-
+import {
+  ClerkProvider,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+} from '@clerk/nextjs'
 
 export default async function RootLayout({
   children,
@@ -39,21 +44,28 @@ export default async function RootLayout({
       </head>
 
       <body className="flex min-h-screen min-w-screen relative">
-        <Sidebar />
+        {/* <ClerkProvider> */}
+          {/* <SignedIn> */}
+            <Sidebar />
 
-        <main className="flex flex-col grow">
-          {children}
-        </main>
-        
-        <AddBoardModal/>
-        <EditBoardModal/>
-        <DeleteBoardModal/>
-        
-        <AddNewTaskModal/>
-        <ShowTaskModal/>
-        <EditTaskModal/>
-        <DeleteTaskModal/>
+            <main className="flex flex-col grow">
+              {children}
+            </main>
+            
+            <AddBoardModal/>
+            <EditBoardModal/>
+            <DeleteBoardModal/>
+            
+            <AddNewTaskModal/>
+            <ShowTaskModal/>
+            <EditTaskModal/>
+            <DeleteTaskModal/>
 
+          {/* </SignedIn> */}
+          {/* <SignedOut> */}
+            {/* <SignInButton></SignInButton> */}
+          {/* </SignedOut> */}
+        {/* </ClerkProvider> */}
       </body>
     </html>
   );

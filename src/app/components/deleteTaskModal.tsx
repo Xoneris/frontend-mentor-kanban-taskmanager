@@ -3,19 +3,21 @@
 import {useSearchParams, usePathname} from "next/navigation";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { Task } from "../types";
 import { getTask } from "../actions/serverAction";
+
 
 export default function DeleteTaskModal() {
 
     const searchParams = useSearchParams();
     const modal = searchParams.get("deleteTask");
     const pathname = usePathname();
-    const [currentTask, setCurrentTask] = useState([])
+    const [currentTask, setCurrentTask] = useState<Task>()
 
     useEffect(() => {
         const fetchTask = async () => {
             try {
-                const result = await getTask(modal)
+                const result = await getTask(Number(modal))
                 setCurrentTask(result[0])
             } catch (err) {
                 console.log(err)

@@ -4,7 +4,7 @@ import {useSearchParams, usePathname} from "next/navigation";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-
+import { Task, Subtask } from "../types";
 import { getTask, getSubtasks } from "../actions/serverAction";
 
 export default function ShowTaskModal() {
@@ -13,15 +13,15 @@ export default function ShowTaskModal() {
     const modal = searchParams.get("taskId");
     const pathname = usePathname();
 
-    const [currentTask, setCurrentTask] = useState([])
-    const [currentSubtasks, setCurrentSubtasks] = useState([])
+    const [currentTask, setCurrentTask] = useState<Task>()
+    const [currentSubtasks, setCurrentSubtasks] = useState<Subtask[]>()
     const [showTaskOptions, setShowTaskOptions] = useState<boolean>(false)
 
  
     useEffect(() => {
         const fetchTask = async () => {
             try {
-                const result = await getTask(modal)
+                const result = await getTask(Number(modal))
                 setCurrentTask(result[0])
             } catch (err) {
                 console.log(err)
@@ -30,7 +30,7 @@ export default function ShowTaskModal() {
 
         const fetchSubtasks = async () => {
             try {
-                const result = await getSubtasks(modal)
+                const result = await getSubtasks(Number(modal))
                 setCurrentSubtasks(result)
             } catch (err) {
                 console.log(err)

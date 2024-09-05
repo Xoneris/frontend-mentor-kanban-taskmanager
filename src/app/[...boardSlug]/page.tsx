@@ -18,6 +18,8 @@ export default async function DynamicPage({ params }: { params: { boardSlug: str
   const currentTaskBoardColumns = await db.select().from(columnsTable).where(eq(columnsTable.taskboardId, currentTaskBoard[0].id))
 
   
+
+  
   // const currentTaskBoardSubtasks = await db.select().from(subTasksTable).where(eq(columnsTable.taskboardId, currentTaskBoard[0].id))
 
   const findTasksOfColumn = async (id:number) => {
@@ -30,6 +32,12 @@ export default async function DynamicPage({ params }: { params: { boardSlug: str
 
   // const test = findTasksOfColumn(1)
   // console.log(test)
+
+  if (!currentTaskBoard || !currentTaskBoardColumns) {
+    return (
+      <h1>404 smile</h1>
+    )
+  }
 
   return (
     <>
@@ -47,7 +55,7 @@ export default async function DynamicPage({ params }: { params: { boardSlug: str
                   columnName={boardColumn.name} 
                   columnId={boardColumn.id}
                   key={boardColumn.id}
-                  />
+                />
               ))}
                 <div className="flex max-w-[280px] justify-center items-center mt-[35px] grow rounded-lg bg-[#E9EFFA] text-mediumGrey dark:bg-opacity-25 dark:bg-darkGrey hover:text-mainPurple hover:cursor-pointer">
                   <p className="heading-xl ">+ New Column</p>

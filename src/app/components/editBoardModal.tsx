@@ -57,13 +57,15 @@ export default function EditBoardModal() {
                 <p className="heading-l">Edit Board</p>
 
                 <label className="body-m">Board Name</label>
-                <input type="text" value={currentBoard.name} className="w-full border h-10 pl-4 rounded dark:bg-darkGrey"/>
+                <input type="text" value={currentBoard.name} 
+                onChange={(e) => setCurrentBoard({...currentBoard, name: e.target.value})} 
+                className="w-full border h-10 pl-4 rounded dark:bg-darkGrey"/>
 
                 <label className="body-m">Board Columns</label>
                 {
                     currentColumns.map((column) => (
                         <div className="flex w-full gap-4 items-center" key={column.id}>
-                            <input type="text" value={column.name} className="w-full border h-10 pl-4 rounded dark:bg-darkGrey" />
+                            <input type="text" value={column.name}  className="w-full border h-10 pl-4 rounded dark:bg-darkGrey" />
                             <div>
                                 <Image src="./assets/icon-cross.svg" alt="cross-icon" width={18} height={18}/>
                             </div>

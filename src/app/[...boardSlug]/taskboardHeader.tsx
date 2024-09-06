@@ -7,9 +7,10 @@ import Link from "next/link";
 interface props {
   taskboardName: string|null,
   taskboardId: number|null,
+  currentColumns: number|null,
 }
 
-export default function TaskboardHeader({taskboardName, taskboardId}:props)  {
+export default function TaskboardHeader({taskboardName, taskboardId, currentColumns}:props)  {
   
   const [showBoardOptions, setShowBoardOptions] = useState<boolean>(false)
 
@@ -27,7 +28,9 @@ export default function TaskboardHeader({taskboardName, taskboardId}:props)  {
       { taskboardId !== null 
       ? <div className="pr-8 flex justify-center items-center gap-6">
         <Link href={"?addNewTask=true"}>
-          <button className="bg-mainPurple h-12 p-4 rounded-3xl text-white flex justify-center items-center hover:bg-mainPurpleHover">+ Add New Task</button>
+          <button className={`bg-mainPurple h-12 p-4 rounded-3xl text-white flex justify-center items-center ${currentColumns === 0 ? "opacity-50" : "hover:bg-mainPurpleHover" } ` } 
+          disabled={currentColumns === 0 ? true : false}
+          >+ Add New Task</button>
         </Link>
         <div>
           <Image src="./assets/icon-vertical-ellipsis.svg" alt="Board options" width={5} height={20} 

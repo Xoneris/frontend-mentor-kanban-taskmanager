@@ -1,9 +1,9 @@
 "use client"
 
-import {useSearchParams, usePathname} from "next/navigation";
+import {useSearchParams, usePathname, useRouter} from "next/navigation";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { getBoard } from "../actions/serverAction";
+import { getBoard, deleteTaskboard } from "../actions/serverAction";
 
 interface Taskboard {
     id: number, 
@@ -16,6 +16,7 @@ export default function DeleteBoardModal() {
     const searchParams = useSearchParams();
     const modal = searchParams.get("deleteBoard");
     const pathname = usePathname();
+    const router = useRouter()
     const [currentBoard, setCurrentBoard] = useState<Taskboard>()
 
     useEffect(() => {
@@ -31,6 +32,13 @@ export default function DeleteBoardModal() {
         fetchBoard()
 
     },[modal])
+
+    const deleteBoard = () => {
+
+        const test = deleteTaskboard(Number(modal))
+        router.push("/")
+
+    }
 
     if (!currentBoard) {
         return
@@ -48,7 +56,7 @@ export default function DeleteBoardModal() {
                 <p className="heading-l text-red">Delete this board?</p>
                 <p className="body-l text-mediumGrey">Are you sure you want to delete the <b><i>&apos;{currentBoard.name}&apos;</i></b> board? This action will remove all columns and tasks and cannot be reversed.</p>
                 <div className="flex w-full gap-4">
-                    <button className="w-full h-10 rounded-full text-white font-bold bg-red hover:bg-redHover">
+                    <button onClick={deleteBoard} className="w-full h-10 rounded-full text-white font-bold bg-red hover:bg-redHover">
                         Delete
                     </button>
                     

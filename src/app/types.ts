@@ -10,6 +10,11 @@ export interface TaskboardColumns {
     taskboardId: number,
 }
 
+export interface test {
+    id: number,
+    name: string,
+}
+
 export interface Task {
     id: number,
     title: string,

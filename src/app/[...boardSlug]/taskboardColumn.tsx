@@ -25,7 +25,7 @@ export default async function TaskboardColumn({columnName, columnId}:props)  {
     }
 
     return (
-        <div className="flex flex-col grow max-w-[280px] gap-5">
+        <div className="flex flex-col grow min-w-[280px] max-w-[280px] gap-5">
             <p className="heading-s text-mediumGrey uppercase tracking-widest">{columnName} ({currentColumnTasks.length})</p>
             {
                 currentColumnTasks.length > 0 

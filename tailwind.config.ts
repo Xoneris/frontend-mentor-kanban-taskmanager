@@ -22,6 +22,10 @@ const config: Config = {
         "red": "#EA5555",
         "redHover": "#FF9898",
       },
+      backgroundImage: {
+        'logo-dark': "url('/assets/logo-dark.svg')",
+        'logo-light': "url('/assets/logo-light.svg')",
+      }
     },
     
   },

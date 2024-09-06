@@ -4,25 +4,24 @@ import Image from "next/image";
 import Link from "next/link"
 import Navigation from "./navigation";
 import DarkModeToggle from "./toggleDarkMode";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { UserButton } from "@clerk/nextjs";
 
 export default function Sideboard() {
 
-    const [showSidebar, setShowSidebar] = useState<Boolean>(true)
+    const [showSidebar, setShowSidebar] = useState<Boolean>(true)   
 
     return (
         <>
-            <div className={`flex flex-col min-w-[300px] bg-white border-r border-gray-200 dark:bg-darkGrey dark:border-gray-700 transition-all 
-                ${showSidebar === true ? null : "hidden"}`}>
+            <div className={`flex flex-col min-w-[300px] -ml-0 bg-white border-r border-gray-200 dark:bg-darkGrey dark:border-gray-700 transition-all 
+                ${showSidebar === true ? null : "-ml-[300px]"}`}>
 
                 <Link href={"/"}>
-                    <Image src={"./assets/logo-dark.svg"} alt="Logo" width={153} height={25} className="ml-8 mt-8" />
+                    <div className="w-[153px] h-[25px] ml-8 mt-8 bg-logo-dark dark:bg-logo-light"></div>
                 </Link>
-                
-            
-                <Navigation/>
 
+                <Navigation/>
+                
                 <div className="mb-8 flex flex-col gap-2">
                     {/* <UserButton /> */}
                     <DarkModeToggle/>

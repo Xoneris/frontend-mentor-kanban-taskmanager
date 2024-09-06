@@ -3,34 +3,33 @@
 import { db } from "../drizzle/db"
 import { eq } from "drizzle-orm"
 import { taskboardTable, columnsTable, tasksTable, subTasksTable } from "../drizzle/schema"
-import { revalidatePath } from "next/cache"
-import { redirect } from "next/navigation"
-
 import { Taskboard, TaskboardColumns, Task, Subtask } from "../types"
 
-
-export async function addNewBoardAction(boardName:string, pathname: string) {
+export async function addNewBoardAction(boardName:string) {
     
-    // const rawFormData = {
-    //     boardName: formData.get('formData'),  
-    // }
+    const boardSlug:string = boardName.toLowerCase().replace(" ", "-")
 
-    // await db.insert(taskboardTable).values({
+    await db.insert(taskboardTable).values({
+            name: boardName,
+            slug: boardSlug,
+        })
+        .returning({
+            insertedId: taskboardTable.id
+        })
 
-    //     // name: "test something derp",
-    //     name: boardName,
-    //     })
-    //     .returning({
-    //     id: taskboardTable.id
-    //     })
-
-    return ("it works yay!")
-
+    const newlyAddedBoard:Taskboard[] = await db.select().from(taskboardTable).where(eq(taskboardTable.name, boardName))
+    return newlyAddedBoard[0].id
 } 
+
+export async function deleteTaskboard(boardId:number) {
+
+    const deleteBoard = await db.delete(taskboardTable).where(eq(taskboardTable.id, boardId))
+    return "success"
+
+}
 
 // GET all Taskboards
 export async function getTaskboards():Promise<Taskboard[]> {
-    // const allBoards = await db.select().from(taskboardTable)
     const allBoards = await db.query.taskboardTable.findMany()
     return allBoards
 }
@@ -58,6 +57,3 @@ export async function getSubtasks(taskId:number):Promise<Subtask[]> {
     const currentSubtasks = await db.select().from(subTasksTable).where(eq(subTasksTable.tasksId, taskId))
     return currentSubtasks
 }
-
-
-    

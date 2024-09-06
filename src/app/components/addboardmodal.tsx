@@ -60,12 +60,12 @@ export default function AddBoardModal() {
 
             <dialog className="absolute w-[480px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl p-8 flex flex-col justify-center items-start dark:text-white dark:bg-darkGrey">
                 <p className="heading-l">Add New Board</p>
-                {columns.map((column,index) => (
+                {/* {columns.map((column,index) => (
                     <div>
                     <span>{index} - </span>
                     <span>{column.name}</span>
                     </div>
-                ))}
+                ))} */}
                 <form onSubmit={handleSubmit} className="w-full flex flex-col gap-6 ">
                     <label className="body-m text-mediumGrey dark:text-white">Name</label>
                     <input type="text" name="boardName" value={boardName} onChange={(e) => setBoardName(e.target.value)} placeholder="e.g. Web Design" className="w-full border h-10 pl-4 rounded dark:bg-darkGrey"/>

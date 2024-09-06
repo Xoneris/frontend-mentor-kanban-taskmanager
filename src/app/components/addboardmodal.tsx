@@ -15,33 +15,35 @@ export default function AddBoardModal() {
     const modal = searchParams.get("newBoard");
     const pathname = usePathname();
     const router = useRouter()
-    // const currentBoard = params
 
     const [boardName, setBoardName] = useState<string>("")
     const [columns, setColumns] = useState<test[]>([
-        {id: 0, name: "ToDo"},
-        {id: 1, name: "Doing"},
-        {id: 2, name: "Done"},
+        {name: "ToDo"},
+        {name: "Doing"},
+        {name: "Done"},
     ]);
-    let incrementer = 3
-
-    // const addNewBoard = addNewBoardAction.bind(null, )
 
     const handleSubmit  = async (e:any) => {
 
         e.preventDefault()
         
         const boardSlug:string = boardName.toString().toLowerCase().replace(" ", "-")
-        // const newBoardId = await addNewBoardAction(boardName)
+        const newBoardId = await addNewBoardAction(boardName)
         console.log(columns)
         alert(columns)
 
-        // if (typeof newBoardId === "number") {
+        if (typeof newBoardId === "number") {
 
-        //     const addColumns = await addNewColumns(newBoardId, columns)
+            const addColumns = await addNewColumns(newBoardId, columns)
 
-        // }
+        }
 
+        setBoardName("")
+        setColumns([
+            {name: "ToDo"},
+            {name: "Doing"},
+            {name: "Done"},
+        ])
 
         router.push(boardSlug)
 
@@ -58,9 +60,9 @@ export default function AddBoardModal() {
 
             <dialog className="absolute w-[480px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl p-8 flex flex-col justify-center items-start dark:text-white dark:bg-darkGrey">
                 <p className="heading-l">Add New Board</p>
-                {columns.map((column) => (
+                {columns.map((column,index) => (
                     <div>
-                    <span>{column.id} - </span>
+                    <span>{index} - </span>
                     <span>{column.name}</span>
                     </div>
                 ))}
@@ -68,17 +70,17 @@ export default function AddBoardModal() {
                     <label className="body-m text-mediumGrey dark:text-white">Name</label>
                     <input type="text" name="boardName" value={boardName} onChange={(e) => setBoardName(e.target.value)} placeholder="e.g. Web Design" className="w-full border h-10 pl-4 rounded dark:bg-darkGrey"/>
                     <label className="body-m text-mediumGrey dark:text-white">Columns</label>
-                    {columns.map((column) => (
-                        <div className="flex w-full gap-4 items-center" key={column.id}>
+                    {columns.map((column,index) => (
+                        <div className="flex w-full gap-4 items-center" key={index}>
                             <input type="text" className="border grow h-10 pl-4 rounded dark:bg-darkGrey" value={column.name} 
                             // onBlur={() => setColumns([...columns, ])}
                                 onChange={(e) => {
                                     const updatedColumns = [...columns]
-                                    updatedColumns[column.id].name = e.target.value  
+                                    updatedColumns[index].name = e.target.value  
                                     setColumns(updatedColumns) 
                                 }}
                             />
-                            <div onClick={() => setColumns(columns.filter(prev_column => prev_column.id !== column.id ))}>
+                            <div onClick={() => setColumns(columns.filter(prev_column => prev_column.name !== column.name ))}>
                                 <Image src="./assets/icon-cross.svg" alt="cross-icon" width={18} height={18}/>
                             </div>
                             
@@ -86,8 +88,7 @@ export default function AddBoardModal() {
                     ))}
                     <button type="button" className="w-full h-10 justify-center items-center text-mainPurple bg-mainPurple bg-opacity-10 dark:bg-white rounded-3xl font-bold"
                         onClick={() => {
-                            setColumns(columns => [...columns, {id: incrementer, name: ""}])
-                            ++incrementer
+                            setColumns(columns => [...columns, {id: columns.length, name: ""}])
                         }
                     }>
                         + Add New Column

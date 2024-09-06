@@ -3,7 +3,8 @@
 import { db } from "../drizzle/db"
 import { eq } from "drizzle-orm"
 import { taskboardTable, columnsTable, tasksTable, subTasksTable } from "../drizzle/schema"
-import { Taskboard, TaskboardColumns, Task, Subtask } from "../types"
+import { Taskboard, TaskboardColumns, Task, Subtask, test } from "../types"
+import TaskboardColumn from "../[...boardSlug]/taskboardColumn"
 
 export async function addNewBoardAction(boardName:string) {
     
@@ -25,7 +26,17 @@ export async function deleteTaskboard(boardId:number) {
 
     const deleteBoard = await db.delete(taskboardTable).where(eq(taskboardTable.id, boardId))
     return "success"
+}
 
+export async function addNewColumns(boardId:number, columns:test[]) {
+
+    for (let i=0; i < columns.length; i++){
+        const test = await db.insert(columnsTable).values({
+            name: columns[i].name,
+            taskboardId: boardId,
+        })
+    }
+    
 }
 
 // GET all Taskboards

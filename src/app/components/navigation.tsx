@@ -40,7 +40,11 @@ export default function Navigation() {
     // }
 
     if (!boards){
-        return 
+        return (
+            <nav className="grow mt-14">
+                
+            </nav>
+        )
     }
 
     return (

@@ -10,8 +10,18 @@ export interface TaskboardColumns {
     taskboardId: number,
 }
 
-export interface test {
+export interface ColumnsToInsert {
     name: string,
+    taskboardId: number,
+}
+
+export interface TempColumns {
+    name: string,
+}
+
+export interface ColumnError {
+    error: string,
+    index: number|null,
 }
 
 export interface Task {

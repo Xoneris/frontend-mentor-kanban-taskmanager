@@ -3,24 +3,22 @@
 import { db } from "../drizzle/db"
 import { eq } from "drizzle-orm"
 import { taskboardTable, columnsTable, tasksTable, subTasksTable } from "../drizzle/schema"
-import { Taskboard, TaskboardColumns, Task, Subtask, test } from "../types"
-import TaskboardColumn from "../[...boardSlug]/taskboardColumn"
+import { Taskboard, TaskboardColumns, Task, Subtask, TempColumns, ColumnsToInsert  } from "../types"
 
 export async function addNewBoardAction(boardName:string) {
     
     const boardSlug:string = boardName.toLowerCase().replace(" ", "-")
-
     await db.insert(taskboardTable).values({
             name: boardName,
             slug: boardSlug,
         })
-        .returning({
-            insertedId: taskboardTable.id
-        })
+        // .returning({
+        //     insertedId: taskboardTable.id
+        // })
 
     const newlyAddedBoard:Taskboard[] = await db.select().from(taskboardTable).where(eq(taskboardTable.name, boardName))
     return newlyAddedBoard[0].id
-} 
+}
 
 export async function deleteTaskboard(boardId:number) {
 
@@ -28,15 +26,21 @@ export async function deleteTaskboard(boardId:number) {
     return "success"
 }
 
-export async function addNewColumns(boardId:number, columns:test[]) {
+export async function addNewColumns(boardId:number, newColumns:TempColumns[]) {
 
-    for (let i=0; i < columns.length; i++){
-        const test = await db.insert(columnsTable).values({
-            name: columns[i].name,
-            taskboardId: boardId,
-        })
-    }
-    
+    const columnsToInsert = newColumns.map((column) => ({
+        name: column.name,
+        taskboardId: boardId
+    }))
+
+    await db.insert(columnsTable).values(columnsToInsert)
+
+    // for (let i=0; i < newColumns.length; i++){
+    //     const test = await db.insert(columnsTable).values({
+    //         name: newColumns[i].name,
+    //         taskboardId: boardId,
+    //     })
+    // }
 }
 
 // GET all Taskboards

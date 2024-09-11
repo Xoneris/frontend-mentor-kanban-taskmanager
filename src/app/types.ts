@@ -17,6 +17,7 @@ export interface ColumnsToInsert {
 
 export interface TempColumns {
     name: string,
+    error: string,
 }
 
 export interface ColumnError {

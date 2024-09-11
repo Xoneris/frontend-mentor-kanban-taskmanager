@@ -23,7 +23,6 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
 
-
   // let logo = ""
   // if (document.documentElement.classList.contains("dark")){ 
   //     logo = "logo-dark.svg"

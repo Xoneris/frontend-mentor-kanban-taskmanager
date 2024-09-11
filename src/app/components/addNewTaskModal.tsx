@@ -3,17 +3,39 @@
 import {useSearchParams, usePathname, redirect} from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { revalidatePath } from "next/cache";
-
-
-import {  } from "../actions/serverAction";
+import { getColumnsOfBoard } from "../actions/serverAction";
+import { TaskboardColumns } from "../types";
 
 export default function AddNewTaskModal() {
 
     const searchParams = useSearchParams();
     const modal = searchParams.get("addNewTask");
     const pathname = usePathname();
+
+    // let currentColumns:TaskboardColumns[] = []
+    const [currentColumns, setCurrentColumns] = useState<TaskboardColumns[]>([])
+
+    // const getColumns = async () => {
+    //     const currentColumns = await getColumnsOfBoard(Number(modal))
+    // }
+    // getColumns();
+
+    useEffect(() => {
+        const fetchColumnsOfBoard = async () => {
+            try {
+                const result = await getColumnsOfBoard(Number(modal))
+                setCurrentColumns(result)
+            } catch (err) {
+                console.log(err)
+            }
+        }
+
+        fetchColumnsOfBoard()
+
+    }, [modal])
+
 
     return (
 
@@ -41,9 +63,11 @@ export default function AddNewTaskModal() {
                     </button>
                     <label className="body-m text-mediumGrey dark:text-white">Status</label>
                     <select className="border h-10 px-4 rounded dark:bg-darkGrey">
-                        <option>ToDo</option>
-                        <option>Doing</option>
-                        <option>Done</option>
+                        {
+                            currentColumns.map((column) => (
+                                <option>{column.name}</option>
+                            ))
+                        }
                     </select>
                     <button className="w-full h-10 flex justify-center items-center text-white bg-mainPurple rounded-3xl font-bold">
                         Create Task

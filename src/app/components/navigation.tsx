@@ -44,7 +44,7 @@ export default function Navigation() {
             <nav className="grow mt-14">
                 
             </nav>
-        )
+        )    
     }
 
     return (
@@ -68,9 +68,7 @@ export default function Navigation() {
                         + Create New Board
                     </Link>
                 </li>
-                
             </ul>
-
         </nav>
     )
 }

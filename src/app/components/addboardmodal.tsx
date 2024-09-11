@@ -18,46 +18,61 @@ export default function AddBoardModal() {
 
     const [boardName, setBoardName] = useState<string>("")
     const [boardNameError, setBoardNameError] = useState<string>("")
+
     const [columns, setColumns] = useState<TempColumns[]>([
-        {name: "ToDo"},
-        {name: "Doing"},
-        {name: "Done"},
+        {name: "ToDo", error: ""},
+        {name: "Doing", error: ""},
+        {name: "Done", error: ""},
     ]);
-    const [columnsError, setColumnsError] = useState<ColumnError[]>([{error: "", index: null}])
-    
-    // ------
-    
+    const [columnsError, setColumnsError] = useState<ColumnError[]>([])
+      
     // Check if Taskboard name is empty
     const checkBoardName = () => {
         
-        if (boardName === "" || boardName === null || boardName === undefined) {
+        if (boardName === undefined || boardName === null || boardName === "") {
             setBoardNameError("Please enter a name for the Taskboard")
         } else {
             setBoardNameError("")
         }
     }
 
+    // Check if any of the Columnnames are empty
     const checkColumName = (columnName:string, columnIndex:number) => {
-        // Check if any of the Columnnames are empty
+        
+        if (columnName === undefined || columnName === null || columnName === "") {
 
-        if (columnName === "") {
+            for (let i=0; i < columnsError.length; i++) {
 
+                if (columnsError[i].index === columnIndex) {
+                    columnsError[i].error = "Please enter a name for the column!";
+
+
+                    return
+                }
+            }
+            columnsError.push({error: "Please enter a name for the column", index: columnIndex})
+            setColumnsError(columnsError)
+            setColumns(columns)
             // if (!columnsError.some(error => error.index === columnIndex)){
             //     setColumnsError([...columnsError, {error: "Please enter a name for the Column", index: columnIndex}])
             // }
-            setColumnsError(columnsError.map(error => error.index === columnIndex ? {...error, error: "Please enter a name for the column"} : error ))
+            
+            // setColumnsError(columnsError.map(error => error.index === columnIndex ? {...error, error: "Please enter a name for the column"} : error ))
 
-        } else if (columnName.length === 1) {
+        } else {
             // setColumnsError([...columnsError, {error: "purged", index: null}])
-            setColumnsError(columnsError.map(error => error.index === columnIndex ? {...error, error: ""} : error ))
-        }
+            // setColumnsError(columnsError.map(error => error.index === columnIndex ? {...error, error: ""} : error ))
+            for (let i=0; i < columnsError.length; i++) {
 
-        //  for (let i=0; i < columns.length; i++) {
-        //     if (columns[i].name === "" || columns[i].name === null || columns[i].name === undefined)
-        //     setColumnsError({error: "Please enter a name for the Column", index: i})
-        //     console.log(columnsError)
-        //     return
-        // }
+                if (columnsError[i].index === columnIndex) {
+                    columnsError[i].error = "";
+                    setColumnsError(columnsError)
+                    // setColumns(columns)
+                    console.log("state is set?")
+                    return
+                }
+            }
+        }
     }
 
     const handleSubmit  = async (e:React.FormEvent) => {
@@ -78,9 +93,9 @@ export default function AddBoardModal() {
 
         setBoardName("")
         setColumns([
-            {name: "ToDo"},
-            {name: "Doing"},
-            {name: "Done"},
+            {name: "ToDo", error: ""},
+            {name: "Doing", error: ""},
+            {name: "Done", error: ""},
         ])
 
         router.push(boardSlug)
@@ -114,11 +129,12 @@ export default function AddBoardModal() {
                     </div>
                     <label className="body-m text-mediumGrey dark:text-white">Columns</label>
                     {columns.map((column,index) => (
-                        <div>
-                            <div className="flex w-full gap-4 items-center" key={index}>
-                                <input type="text" className={`border grow h-10 pl-4 rounded dark:bg-darkGrey`} 
+                        <div key={index}>
+                            <div className="flex w-full gap-4 items-center" >
+                                <input type="text" 
+                                    className={`border grow h-10 pl-4 rounded dark:bg-darkGrey`} 
                                     value={column.name} 
-                                    onBlur={(e) => checkColumName(column.name, index)}
+                                    // onBlur={(e) => checkColumName(column.name, index)}
                                     onChange={(e) => {
                                         const updatedColumns = [...columns]
                                         updatedColumns[index].name = e.target.value  
@@ -132,28 +148,20 @@ export default function AddBoardModal() {
                             </div>
                             { 
                                 columnsError.map((error) => (
-                                    
                                     error.index === index 
                                         ? error.error !== ""
-                                            ? <p className="text-red">{error.error}</p>
+                                            ? <p className="text-red" key={error.index}>{error.error}</p>
                                             : null
                                         : null 
-                                    
                                 ))
-                                // columnsError.index === index 
-                                // ? columnsError.error !== "" 
-                                //     ? <p>{columnsError.error}</p>
-                                //     : null
-                                // : null
-                                
                             }
                         </div>
                     ))}
                     <button type="button" className="w-full h-10 justify-center items-center text-mainPurple bg-mainPurple bg-opacity-10 dark:bg-white rounded-3xl font-bold"
                         onClick={() => {
-                            setColumns(columns => [...columns, {id: columns.length, name: "New column"}])
-                        }
-                    }>
+                            setColumns(columns => [...columns, {name: "New column", error: ""}])
+                        }}
+                    >
                         + Add New Column
                     </button>
 

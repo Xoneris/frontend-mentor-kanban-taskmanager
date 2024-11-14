@@ -12,7 +12,6 @@ import TaskboardHeader from "./taskboardHeader";
 export default async function DynamicPage({ params }: { params: { boardSlug: string|null } })  {
   
   const { boardSlug } = params;
-
   let currentTaskBoard:Taskboard[] = []
   let currentTaskBoardColumns:TaskboardColumns[] = []
 

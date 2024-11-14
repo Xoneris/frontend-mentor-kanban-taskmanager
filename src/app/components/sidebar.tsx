@@ -5,7 +5,6 @@ import Link from "next/link"
 import Navigation from "./navigation";
 import DarkModeToggle from "./toggleDarkMode";
 import { useState, useEffect } from "react";
-import { UserButton } from "@clerk/nextjs";
 
 export default function Sideboard() {
 
@@ -23,7 +22,6 @@ export default function Sideboard() {
                 <Navigation/>
                 
                 <div className="mb-8 flex flex-col gap-2">
-                    {/* <UserButton /> */}
                     <DarkModeToggle/>
 
                     <div className="h-12 flex items-center mr-6 pl-6 gap-4 hover:text-mainPurple hover:bg-mainPurple hover:dark:bg-white hover:bg-opacity-10 hover:cursor-pointer rounded-r-3xl">

@@ -4,6 +4,7 @@ import { db } from "../drizzle/db"
 import { eq } from "drizzle-orm"
 import { taskboardTable, columnsTable, tasksTable, subTasksTable } from "../drizzle/schema"
 import { Taskboard, TaskboardColumns, Task, Subtask, TempColumns, ColumnsToInsert  } from "../types"
+import data from "../data.json"
 
 export async function addNewBoardAction(boardName:string) {
     

@@ -43,28 +43,20 @@ export default async function RootLayout({
       </head>
 
       <body className="flex min-h-screen min-w-screen relative">
-        {/* <ClerkProvider> */}
-          {/* <SignedIn> */}
-            <Sidebar />
+        <Sidebar />
 
-            <main className="flex flex-col grow">
-              {children}
-            </main>
-            
-            <AddBoardModal/>
-            <EditBoardModal/>
-            <DeleteBoardModal/>
-            
-            <AddNewTaskModal/>
-            <ShowTaskModal/>
-            <EditTaskModal/>
-            <DeleteTaskModal/>
-
-          {/* </SignedIn> */}
-          {/* <SignedOut> */}
-            {/* <SignInButton></SignInButton> */}
-          {/* </SignedOut> */}
-        {/* </ClerkProvider> */}
+        <main className="flex flex-col grow">
+          {children}
+        </main>
+        
+        <AddBoardModal/>
+        <EditBoardModal/>
+        <DeleteBoardModal/>
+        
+        <AddNewTaskModal/>
+        <ShowTaskModal/>
+        <EditTaskModal/>
+        <DeleteTaskModal/>
       </body>
     </html>
   );

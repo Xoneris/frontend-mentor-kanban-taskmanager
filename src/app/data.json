@@ -1,7 +1,9 @@
 {
   "boards": [
     {
+      "id": 0,
       "name": "Platform Launch",
+      "slug": "platform-launch",
       "columns": [
         {
           "name": "Todo",
@@ -284,7 +286,9 @@
       ]
     },
     {
+      "id": 1,
       "name": "Marketing Plan",
+      "slug": "marketing-plan",
       "columns": [
         {
           "name": "Todo",
@@ -375,7 +379,9 @@
       ]
     },
     {
+      "id": 2,
       "name": "Roadmap",
+      "slug": "roadmap",
       "columns": [
         {
           "name": "Now",

@@ -25,7 +25,6 @@ export default function AddBoardModal() {
         {id: 2, name: "Doing", error: ""},
         {id: 3, name: "Done", error: ""},
     ]);
-    const [columnsError, setColumnsError] = useState<ColumnError[]>([])
       
     // Check if Taskboard name is empty
     const checkBoardName = () => {
@@ -43,7 +42,7 @@ export default function AddBoardModal() {
 
         if (column.name === "") {
             for (let i=0; i < updatedColumns.length; i++) {
-                if( updatedColumns[i].id === column.id) {
+                if (updatedColumns[i].id === column.id) {
                     updatedColumns[i].error = "Please enter a name for the Column"
                 }
             }
@@ -51,7 +50,7 @@ export default function AddBoardModal() {
             
         } else {
             for (let i=0; i < updatedColumns.length; i++) {
-                if( updatedColumns[i].id === column.id) {
+                if (updatedColumns[i].id === column.id) {
                     updatedColumns[i].error = ""
                 }
             }
@@ -68,7 +67,7 @@ export default function AddBoardModal() {
         }
 
         for (let i=0; i<columns.length; i++) {
-            if( columns[i].error !== "") {
+            if (columns[i].error !== "") {
                 alert("Please enter a name for every column")
                 return
             }
